@@ -1,0 +1,29 @@
+Building an app that uses d3.js
+D3.js for visualization
+
+Cin. derella
+@cin-derella
+cin-derella@github.com
+
+* Repository
+
+A repository of this study project is available on Github [[https://github.com/cin-derella/d3jsStudy]]
+
+* Agenda
+
+- Intro to javascript
+- Intro to D3.js
+- Embed D3.js in project
+
+* What we're building
+
+.image images/d3js.png _ 800
+.caption [[https://d3js.org/][d3js org]]
+
+* What we need
+The code:
+- [[https://github.com/d3/d3][github d3.js]]
+An editor:
+- I use VS Code for editing
+
+* Let's code !
