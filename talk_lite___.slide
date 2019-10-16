@@ -30,4 +30,9 @@ An editor:
 
 - I use VS Code for editing
 
+* Our Data
+
+..d3jsdata [imageName] [2018.10 10], [2018.11 20], [2018.12 30]
+.image image/imageName.jpg
+
 * Let's code !
