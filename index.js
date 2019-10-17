@@ -7,11 +7,17 @@ const data = [
 const svg = d3.select('svg');
 const rect = svg.select('rect')
     .data(data)
-    .attr('width',function(d){return d.width})
-    .attr('height',function(d){return d.height})
-    .attr('fill',function(d){return d.fill});
-console.log(rect);
+    .attr('width',(d,i,n)=> d.width)
+    .attr('height',d =>d.height
+    .attr('fill',d => d.fill
 
+
+// simplified format, those statement downbelow are idential.
+// .attr('width',function(d){return d.width});
+// .attr('width',(d)=>{
+//     return d.width;
+// })
+// .attr('width'd => d.width);
 
 //function and function calling
 // var a = function(x) {return x^2}
