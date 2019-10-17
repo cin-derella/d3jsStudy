@@ -1,15 +1,24 @@
 
 
 const data = [
-    {width:300,height:100,fill:'pink'}
+    {width:400,height:500,fill:'yellow'},
+    {width:300,height:200,fill:'pink'},
+    {width:100,height:100,fill:'green'}
+  
 ];
 
 const svg = d3.select('svg');
-const rect = svg.select('rect')
+const rect = svg.selectAll('rect')
     .data(data)
     .attr('width',(d,i,n)=> d.width)
-    .attr('height',d =>d.height
-    .attr('fill',d => d.fill
+    .attr('height',d =>d.height)
+    .attr('fill',d => d.fill)
+console.log(rect);
+
+
+
+
+
 
 
 // simplified format, those statement downbelow are idential.
