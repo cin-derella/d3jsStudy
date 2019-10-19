@@ -18,7 +18,15 @@ const xAxisGroup = graph.append('g')
     .attr('transform',`translate(0,${graphHeight})`);
 const yAxisGroup = graph.append('g');
 
-d3.json('menu.json').then(data =>{
+db.collection('dishes').get().then(res =>{
+    var data = [];
+    console.log(res);
+    res.docs.forEach(doc => {
+        console.log(doc.data());
+        data.push(doc.data());
+    })
+
+    console.log(data)
 
     const y = d3.scaleLinear()
         .domain([0,1000])
