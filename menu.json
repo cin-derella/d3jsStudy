@@ -4,7 +4,7 @@
         "orders":200
     },
     {
-        "name":"veg currr",
+        "name":"veg curry",
         "orders":600
     },
     {
@@ -14,5 +14,9 @@
     {
         "name":"veg surprise",
         "orders":900
+    },
+    {
+        "name":"veg burge",
+        "orders":1000
     }
 ]

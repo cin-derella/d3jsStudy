@@ -14,12 +14,15 @@ const graph = svg.append('g')
     .attr('height',graphHeight)
     .attr('transform',`translate(${margin.left},${margin.top})`);
 
+const xAxisGroup = graph.append('g')
+    .attr('transform',`translate(0,${graphHeight})`);
+const yAxisGroup = graph.append('g');
 
 d3.json('menu.json').then(data =>{
 
     const y = d3.scaleLinear()
         .domain([0,1000])
-        .range([0,500]);
+        .range([graphHeight,0]);
      
     // const min = d3.min(data,d => d.orders);
     // const max = d3.max(data,d => d.orders);
@@ -36,19 +39,32 @@ d3.json('menu.json').then(data =>{
         .data(data);
 
     rects.attr('width',x.bandwidth)
-        .attr('height',d=>y(d.orders))
+        .attr('height',d=>graphHeight-y(d.orders))
         .attr('fill','orange')
-        .attr('x',d=>x(d.name));
+        .attr('x',d=>x(d.name))
+        .attr('y',d=>y(d.orders));
 
     rects.enter()
         .append('rect')
         .attr('width',x.bandwidth)
-        .attr('height',d=>y(d.orders))
+        .attr('height',d=>graphHeight-y(d.orders))
         .attr('fill','orange')
-        .attr('x',d=>x(d.name));
+        .attr('x',d=>x(d.name))
+        .attr('y',d=>y(d.orders));
     
+    //create and all the axes
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y)
+        .ticks(4)
+        .tickFormat(d=>d+' orders');
 
+    xAxisGroup.call(xAxis);
+    yAxisGroup.call(yAxis);
 
+    xAxisGroup.selectAll('text')
+        .attr('transform','rotate(-40)')
+        .attr('text-anchor','end')
+        .attr('fill','orange');
 
     // rects.attr('width',50)
     //     .attr('height',d=>y(d.orders))
