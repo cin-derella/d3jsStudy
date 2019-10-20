@@ -1,0 +1,230 @@
+Go talks スライドの作り方
+how to use go present
+18:00 18 May 2014
+Tags: Go, talks, present, slide
+
+taknb2nch
+freelance software engineer
+mail@mail.com
+https://myurl
+@twitter
+
+* go.toolsのインストール
+
+  $ cd $GOPATH
+  $ go get code.google.com/p/go.tools/cmd/present/
+  $ cd src/code.google.com/p/go.tools/cmd/present/
+  $ go install
+
+* ファイル名
+
+拡張子はslideまたはarticle
+
+* タイトルだけのページ
+
+* 単純な内容
+
+タイトルの後にそのまま書きます。
+
+ページの内容を書きます。
+ページの内容を書きます。
+ページの内容を書きます。
+ページの内容を書きます。
+
+* 箇条書き
+
+箇条書きにします。
+先頭に- （ハイフン+半角空白を入れます）
+
+- 箇条書きする項目
+- 箇条書きする項目
+- 箇条書きする項目
+- 箇条書きする項目
+- 箇条書きする項目
+
+* 複数のセクションを使う
+
+セクションは期待した動きをしません。（たぶん）
+
+** サブセクション
+
+あああああ
+
+
+*** サブサブセクション
+
+
+* 文字のスタイル
+
+文字のスタイルを変更します。
+標準の日本語フォントでは太字は変わりません。
+
+NormalStyle
+*BoldStyle*
+_ItalicStyle_
+`HogeHoge`
+
+普通の文字
+*太字にした文字*
+_斜体にした文字_
+`ほげほげ`
+
+* 引用
+
+  1行開けて行の先頭に空白を2個いれます。
+
+* 画像の表示
+
+画像を表示します。
+
+  .image ./gopresent/images/frontpage.png 170 125
+
+.image ./gopresent/images/frontpage.png 170 125
+
+* リンクの表示
+
+リンクを表示します。
+
+  .link http://golang.org golang.org
+
+.link http://golang.org golang.org
+
+* 指定するURLの内容を表示
+
+指定するURLの内容を表示します。
+外部サイトの内容や、表示サイズによっては前後ページが崩れる場合があります。
+
+  .iframe http://golang.org/ 300 800
+
+.iframe http://golang.org/ 300 800
+
+ページの表示がおかしい場合はリロードしてください。
+
+* HTMLコンテンツの表示
+
+ファイル指定するHTMLコンテンツを差し込みます。
+差し込む内容が大きすぎると前後ページが崩れるかも知れません。
+標準のコマンドでは表現できない内容等を自分で作って差し込むことができます。
+
+  .html ./gopresent/html/youtube.html
+
+.html ./gopresent/html/youtube.html
+
+* ソースコードの表示と実行
+
+指定したソースコードを表示して、runボタンを付けます。
+
+  .play ./gopresent/src/hello.go
+
+.play ./gopresent/src/hello.go
+
+* ソースコードの表示方法1
+
+実行ボタンを表示しないで、ソースコードのみを表示します。
+
+  .code ./gopresent/src/hello.go
+
+.code ./gopresent/src/hello.go
+
+-editや-numbersオプションがあるようですが上手く動作しません。
+
+* ソースコードの表示方法2
+
+  // このコメント行は表示されません。 OMIT
+
+のようにコメント行がOMITで終わると非表示になります。
+
+.code ./gopresent/src/omit1.go
+
+* ソースコードの表示方法3
+
+指定した箇所だけ表示します。
+
+  .code ./gopresent/src/omit2.go /開始マーク/,/終了マーク/
+
+一般的にはstart、endが使用されるようです。
+
+.code ./gopresent/src/omit2.go / start type/,/ end type/
+
+* ソースコードの表示方法4
+
+OMITで終わる行は省略されます。
+
+  .code ./gopresent/src/omit2.go / start doSomething1 OMIT/,/ end doSomething1 OMIT/
+
+.code ./gopresent/src/omit2.go / start doSomething1 OMIT/,/ end doSomething1 OMIT/
+
+* ソースコードの表示方法5
+
+正規表現で表示範囲を指定することもできます。
+
+  .code ./gopresent/src/omit2.go /^func doSomething2/,/}/
+
+.code ./gopresent/src/omit2.go /^func doSomething2/,/}/
+
+* ソースコードの表示方法6
+
+指定した行を強調することもできます。
+強調したい行の最後に // HL を入れます。
+
+.code ./gopresent/src/highlight.go /^func doSomething3/,/}/
+
+* ソースコードの表示方法7
+
+HLxxxのようにHLのあとにラベルを指定した場合、
+スライド内でラベルを指定した場合のみ有効になります。
+
+  .code ./gopresent/src/highlight.go /^func doSomething3/,/}/ HL1
+
+.code ./gopresent/src/highlight.go /^func doSomething3/,/}/ HL1
+
+* スライドの実行
+
+ローカルでスライドを実行します。
+
+  $ cd スライドのルートディレクトリ
+  $ present
+
+http://127.0.0.1:3999/ をブラウザで開きます。
+
+* Go App Engineへのデプロイ1
+
+ディレクトリ階層のサンプル
+
+  /2014/
+    /gopresent/
+    gopresent.slide
+  /present
+  app.yaml
+
+スライドに関連するファイルは、slideファイルと同名のディレクトリを作って、その中に置いておくのがスマートなようです。
+
+* Go App Engineへのデプロイ2
+
+  $ cp $GOPATH/src/code.google.com/p/go.tools/cmd/present スライドのルートディレクトリ
+
+* Go App Engineへのデプロイ3
+
+yamlファイル
+
+.code ./gopresent/app.yaml.txt
+
+* Go App Engineへのデプロイ4
+
+  $ cd yamlファイルのあるディレクトリ
+  $ goapp deploy
+
+* GithubやGoogle Codeで公開
+
+GithubやGoogle Codeにスライドファイルを置いておくと、
+
+  http://go-talks.appspot.com/github.com/taknb2nch/go-talks/2014/gosample.slide
+
+な形で参照できるようなのですが、上手く動作しないようです。
+
+* 参考
+
+.link https://godoc.org/code.google.com/p/go.tools/present present - GoDoc
+.link http://go-talks.appspot.com/ go-talks.appspot.com
+.link https://www.youtube.com/watch?v=83JBmS8WpHM go present - create html slides with extractable, executable go code
+
