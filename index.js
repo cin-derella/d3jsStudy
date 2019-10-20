@@ -31,7 +31,7 @@ const x = d3.scaleBand()
 const xAxis = d3.axisBottom(x);
 const yAxis = d3.axisLeft(y)
     .ticks(4)
-    .tickFormat(d => d + ' orders');
+    .tickFormat(d => d + ' contributions');
 
 
 
@@ -47,8 +47,8 @@ const t = d3.transition().duration(1500);
 //update function
 const update = (data) => {
     //updating domain scales
-        y.domain([0, d3.max(data, d => d.orders)]);
-        x.domain(data.map(item => item.name));
+        y.domain([0, d3.max(data, d => d.contribution)]);
+        x.domain(data.map(item => item.week));
         
     //join the data to rect
         const rects = graph.selectAll('rect')
@@ -60,22 +60,22 @@ const update = (data) => {
     //update current shapes in DOM
     rects.attr('width', x.bandwidth)
         .attr('fill', 'orange')
-        .attr('x', d => x(d.name))
+        .attr('x', d => x(d.week))
         .transition(t)
-            .attr('y', d => y(d.orders))
-            .attr('height', d => graphHeight - y(d.orders));
+            .attr('y', d => y(d.contribution))
+            .attr('height', d => graphHeight - y(d.contribution));
 
     //append the enter selection to the DOM
     rects.enter()
         .append('rect')
         .attr('height',0)
         .attr('fill', 'orange')
-        .attr('x', d => x(d.name))
+        .attr('x', d => x(d.week))
         .attr('y',graphHeight)
         .transition(t)
             .attrTween('width',widthTween)
-            .attr('y', d => y(d.orders))
-            .attr('height', d => graphHeight - y(d.orders));
+            .attr('y', d => y(d.contribution))
+            .attr('height', d => graphHeight - y(d.contribution));
 
     //call axes
     xAxisGroup.call(xAxis);
@@ -86,9 +86,10 @@ const update = (data) => {
 
 var data = [];
 // get data from firestore
-db.collection('dishes').onSnapshot(res=>{
+db.collection('contribution').onSnapshot(res=>{
     res.docChanges().forEach(change=>{
         const doc = {...change.doc.data(),id:change.doc.id};
+        console.log(`${change.type} ${doc.id}`)
         switch(change.type){
             case 'added':
                 data.push(doc);
@@ -104,6 +105,9 @@ db.collection('dishes').onSnapshot(res=>{
                 break;
         }
     });
+    data.sort((a, b) => {
+        return a.week > b.week;
+    })
     update(data)
 })
 
@@ -135,20 +139,20 @@ const widthTween = (d)=>{
 
 
 
-    // const min = d3.min(data,d => d.orders);
-    // const max = d3.max(data,d => d.orders);
-    // const extent = d3.extent(data,d => d.orders);
+    // const min = d3.min(data,d => d.contribution);
+    // const max = d3.max(data,d => d.contribution);
+    // const extent = d3.extent(data,d => d.contribution);
 
 
     // rects.attr('width',50)
-    //     .attr('height',d=>y(d.orders))
+    //     .attr('height',d=>y(d.contribution))
     //     .attr('fill','orange')
     //     .attr('x',(d,i)=>i *70);
 
     // rects.enter()
     //     .append('rect')
     //     .attr('width',50)
-    //     .attr('height',d=>y(d.orders))
+    //     .attr('height',d=>y(d.contribution))
     //     .attr('fill','orange')
     //     .attr('x',(d,i)=>i *70);
 

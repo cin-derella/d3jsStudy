@@ -32,7 +32,7 @@ An editor:
 
 * Our Data
 
-..d3jsdata [imageName] [2018.10 10], [2018.11 20], [2018.12 30]
-.image image/imageName.jpg
+..d3jsdata [imageweek] [2018.10 10], [2018.11 20], [2018.12 30]
+.image image/imageweek.jpg
 
 * Let's code !

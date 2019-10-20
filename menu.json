@@ -1,22 +1,22 @@
 [
     {
-        "name":"veg soup",
-        "orders":200
+        "week":"veg soup",
+        "contribution":200
     },
     {
-        "name":"veg curry",
-        "orders":600
+        "week":"veg curry",
+        "contribution":600
     },
     {
-        "name":"veg pasta",
-        "orders":300
+        "week":"veg pasta",
+        "contribution":300
     },
     {
-        "name":"veg surprise",
-        "orders":900
+        "week":"veg surprise",
+        "contribution":900
     },
     {
-        "name":"veg burge",
-        "orders":1000
+        "week":"veg burge",
+        "contribution":1000
     }
 ]
