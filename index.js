@@ -50,7 +50,7 @@ const update = (data) => {
         x.domain(data.map(item => item.name));
         
     //join the data to rect
-        const rects = graph.selectAll('rects')
+        const rects = graph.selectAll('rect')
         .data(data);
     
     //remove exit selection
@@ -88,10 +88,9 @@ db.collection('dishes').get().then(res => {
     update(data);
 
     d3.interval(()=>{
-        data[0].orders +=50;
-    //update orders
-     update(data);
-    },1000)
+        data.pop();
+        update(data);
+    },3000)
 
 
 
