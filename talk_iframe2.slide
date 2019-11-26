@@ -15,6 +15,14 @@ cin-derella@github.com
 - Intro to D3.js
 - Embed D3.js in project
 
+** subtitle 2
+  
+  subtitle 2 content
+  
+*** subtitle 3
+
+  subtitle 3 content
+  
 * What we're building
 
 .image images/d3js.png _ 800
