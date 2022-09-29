@@ -4,7 +4,7 @@
   "description": "d3js_study",
   "main": "index.js",
   "dependencies": {
-    "d3": "^5.12.0"
+    "d3": "^7.6.1"
   },
   "devDependencies": {},
   "scripts": {
